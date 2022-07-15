@@ -1,1 +1,1 @@
-# fast-cp
+# Fast and Accurate Tensor Decomposition without a High Performance Computing Machine## CitationsYou can freely use and modify the code, without warranty, so long as you provide attributionto the authors.```@INPROCEEDINGS{9378111,  author={He, Huan and Xi, Yuanzhe and Ho, Joyce C},  booktitle={2020 IEEE International Conference on Big Data (Big Data)},   title={Fast and Accurate Tensor Decomposition without a High Performance Computing Machine},    year={2020},  volume={},  number={},  pages={163-170},    doi={10.1109/BigData50022.2020.9378111}}```

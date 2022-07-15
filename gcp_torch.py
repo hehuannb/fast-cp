@@ -1,35 +1,28 @@
 '''
-Compute a CP tensor factorization
-using direct Newton methods
+Fast-CP
 '''
 import torch
 import numpy as np
-from scipy.optimize import fmin_l_bfgs_b
 import random
 import time
 import numpy_groupies as npg
+import collections
+import pandas as pd
+import tqdm
+
 from tensorox.decomposition import BaseCP
 from tensorox.ktensor import Ktensor
-import collections
-from tensorox.sptensor import Sptensor
-from tensorox.utils import range_omit_k, fac_to_vec, cp_vec_to_fac
-import pandas as pd
-from tensorox.metrics import kl_div, lsqr_fit, binary_feval
 from collections import defaultdict
 from sklearn import preprocessing as skp
 from string import ascii_letters as einchars
 from operator import itemgetter
-from memory_profiler import profile
-import tqdm
+
 
 AUG_MIN = 1e-50
 epsilon = 1e-8
 beta_1 = 0.9
 beta_2 = 0.99
 gamma = .5
-
-
-
 
 
 def reconstruct(factors):
@@ -278,11 +271,7 @@ class spAGCP_torch(BaseCP):
             # loss = ls_feval(xd, self.model)
             # loss=1
             print(loss)
-            failed = loss > loss_prev
             iter_info[e+1] = {'time': time.time()-start, 'loss': loss, 'losst':loss_true}
-        # self.model.normalize()
-        # self.model.sort_components()
-        # self.model.fix_signs()
 
         return iter_info
 
