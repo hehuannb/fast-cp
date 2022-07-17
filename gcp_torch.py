@@ -8,7 +8,7 @@ import time
 import numpy_groupies as npg
 import collections
 import pandas as pd
-import tqdm
+# import tqdm
 
 from tensorox.decomposition import BaseCP
 from tensorox.ktensor import Ktensor
@@ -172,7 +172,7 @@ class spAGCP_torch(BaseCP):
             y = np.divide(y, np.dot(y.T, y))
         return y, X
 
-    def fit(self, X,subs, vals, **kwargs):
+    def fit(self, X, subs, vals, **kwargs):
         self.model = kwargs.pop('init', None)
         self.subs = subs
         self.vals = vals
@@ -184,7 +184,7 @@ class spAGCP_torch(BaseCP):
         alpha = kwargs.pop('alpha', 1e-3)
         extrapolation = kwargs.pop('acceleration', True)
         sampling = kwargs.pop('sample', 'uniform')
-        print("batch_size:", batch, 'maxepoch:', maxepoch, 'inner-iter:', inner, 'adan:',adam, 'lr:', alpha,'acceleration:', extrapolation)
+        print("batch_size:", batch, 'maxepoch:', maxepoch, 'inner-iter:', inner, 'adam:',adam, 'lr:', alpha,'acceleration:', extrapolation)
         seed = 0
         factors = np.empty(self.num_mode, dtype=object)
         rstate = np.random.RandomState(seed)
@@ -242,8 +242,8 @@ class spAGCP_torch(BaseCP):
         epsi = 0
         start = time.time()
         ii = 0
-        for e in tqdm.tqdm(range(maxepoch)):
-            for i in tqdm.tqdm(range(inner)):
+        for e in (range(maxepoch)):
+            for i in(range(inner)):
                 grad = self.cal_grad(X, batch, data_type=loss_type, samplemethod=sampling)
                 if adam:
                     gg = []
